@@ -54,9 +54,9 @@ export default function Sidebar() {
               return (
                 <Tooltip key={link.href}>
                   <TooltipTrigger asChild>
-                    <Button variant={isActive === link.href ? 'outline' : 'ghost'} className={isActive === link.href ? 'bg-zinc-600 rounded-lg p-3 text-white' : link.className}>
+                    <Link href={link.href} className={isActive === link.href ? 'bg-zinc-600 rounded-lg p-3 text-white' : link.className}>
                       {link.icon && <link.icon className="h-5 w-5" />}
-                    </Button>
+                    </Link>
                   </TooltipTrigger>
                 </Tooltip>
               )

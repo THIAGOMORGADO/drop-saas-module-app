@@ -1,12 +1,6 @@
 'use client'
 
-import Chats, { ChatsProps } from "@/app/components/Chats";
-import { data } from "@/app/utils/charts";
-
 export default function DashboardPage() {
-  const users = [{ role: 'admin' }]; // Replace this with your actual user data
-  const dataCharts: { name: string; value: number }[] = data;
-
   return (
     <div>
       <div className="flex flex-col l sm:flex-col md:flex-row gap-4 sm:px-20 pl-4 pr-4">
@@ -15,15 +9,6 @@ export default function DashboardPage() {
           <h2 className="text-2xl font-bold mb-4">Área 1</h2>
           <p>Conteúdo da primeira área</p>
         </div>
-
-        {
-          users.filter((user) => user.role === 'admin').map((user, index) => (
-            <Chats key={index} data={dataCharts} />
-          ))
-        }
-
-
-
       </div>
     </div>
   )

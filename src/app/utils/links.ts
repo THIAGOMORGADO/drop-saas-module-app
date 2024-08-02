@@ -39,10 +39,5 @@ export const menuLinkFooter = [{
     name: "Configuraçoes",
     className: "flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8 hover:bg-zinc-500 hover:text-white"
   },
-  {
-    href: "/dashboard/logout",
-    icon: LogoutIcon,
-    name: "Logout",
-    className: "flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8 hover:bg-zinc-500 hover:text-white"
-  }
+ 
 ]

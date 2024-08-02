@@ -2,22 +2,34 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
-import { useAuth } from "@/app/contexto/AuthContext";
+import { useState, useRef } from "react";
+import { useAuth } from "@/app/context/AuthContext";
 
 
 export default function SettingPage() {
   const { user, logout } = useAuth();
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleLogout = () => {
     logout();
     // The logout function from useAuth already handles cookie deletion and redirection
   };
 
+  const handleChangePicture = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        console.log('File content:', reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
   return (
-    <div className="container mx-auto p-6 px-10 sm:max-w-[50%]">
+    <div className="container mx-auto p-6 md:px-10 sm:max-w-[70%] lg:max-w-[50%]">
       <h1 className="text-2xl font-bold mb-6">Configuraçes do Usuário</h1>
 
       <div className="bg-white shadow-md rounded-lg p-6">
@@ -40,9 +52,20 @@ export default function SettingPage() {
               <p className="text-gray-500">{user?.role}</p>
             </>
 
-            <button className="text-blue-500 hover:text-blue-700 mt-2">
+            <input
+              type="file"
+              id="profilePicture"
+              style={{ display: 'none' }}
+              onChange={handleChangePicture}
+              ref={fileInputRef}
+            />
+            <Button
+              onClick={() => fileInputRef.current?.click()}
+              variant="outline"
+              className="text-blue-500 hover:text-blue-700 mt-2"
+            >
               Alterar foto
-            </button>
+            </Button>
           </div>
         </div>
 
@@ -74,7 +97,7 @@ export default function SettingPage() {
           />
         </div>
 
-        <div>
+        <form >
           <h3 className="text-lg font-semibold mb-2">Alterar Senha</h3>
           <div className="mb-4">
             <label htmlFor="newPassword" className="block text-sm font-medium text-gray-700 mb-2">
@@ -113,7 +136,7 @@ export default function SettingPage() {
               Alterar Senha
             </Button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );

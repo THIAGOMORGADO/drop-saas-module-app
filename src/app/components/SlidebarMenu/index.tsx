@@ -3,17 +3,21 @@
 import Link from "next/link"
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
-
 import DashboardMain from "../DashboardMain"
-
 import Sidebar from "../TooTips"
 import { usePathname } from "next/navigation"
-
 import { menuLinkFooter, menuLinkMain } from "@/app/utils/links"
 import { DashboardIcon, MenuIcon } from "../IconsSvg"
+import { useAuth } from "@/app/context/AuthContext"
 
 export default function SlidebarMenu({ children }: { children: React.ReactNode }) {
   const pathName = usePathname();
+  const { logout } = useAuth()
+
+  function handleLogOut() {
+    logout()
+  }
+
 
   return (
     <div className="flex min-h-screen flex-col bg-muted/40">

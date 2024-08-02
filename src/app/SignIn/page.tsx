@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation"
 import { ChromeIcon, FacebookIcon, GithubIcon } from "../components/IconsSvg"
 
 import { useForm } from "react-hook-form"
-import { useAuth } from "../contexto/AuthContext"
+import { useAuth } from "../context/AuthContext"
 
 
 export default function SignInPage() {
