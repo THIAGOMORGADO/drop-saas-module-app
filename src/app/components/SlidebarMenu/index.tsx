@@ -69,7 +69,6 @@ export default function SlidebarMenu({ children }: { children: React.ReactNode }
                         <Link
                           href={link.href}
                           className="flex w-full items-center justify-between text-muted-foreground"
-
                         >
                           <div className="flex flex-row items-center justify-between">
                             <link.icon className="h-5 w-5 mx-2" />
