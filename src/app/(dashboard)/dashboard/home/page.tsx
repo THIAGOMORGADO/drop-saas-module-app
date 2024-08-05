@@ -1,57 +1,41 @@
-import { SheetItem } from "@/app/components/SheetItem";
-import { appointmentList } from "@/app/utils/appointmentList";
-import Image from "next/image";
+'use client'
+
+import { useAuth } from "@/app/context/AuthContext";
+import { Button } from "@/components/ui/button";
+import { PlayIcon } from "@radix-ui/react-icons";
+import { useState } from "react";
 
 export default function HomePage() {
+  const user = useAuth()
+  const [isCourseisPlatyer, setIsCourseisPlay] = useState<Array<any>>([])
+
+  const teachers = [
+    {
+      name: "Professor 1",
+      subjects: ["Matemática", "Física", "Química"]
+    },
+    {
+      name: "Professor 2",
+      subjects: ["Português", "História", "Geografia"]
+    },
+    {
+      name: "Professor 3",
+      subjects: ["Biologia", "Educação Física", "Artes"]
+    }
+  ];
+
   return (
-    <div className="flex flex-col items-center justify-center">
-      <div className="w-full flex items-center justify-center md:px-10 sm:px-10 px-5">
-        <div className="w-full max-w-4sm sm:px-10">
-          <h1 className="text-2xl font-bold mb-4">Dashboard Overview</h1>
-          <div className="bg-white shadow-md rounded-lg overflow-hidden">
-            <table className="w-full">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nome</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-5000 uppercase tracking-wider">Status</th>
-
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {appointmentList.map((link, index) => (
-                  <tr key={index}>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center">
-                        <div className="flex-shrink-0 h-10 w-10">
-                          {link.profileImage ? (
-                            <img src={link.profileImage} alt={link.name} className="h-10 w-10 rounded-full" />
-                          ) : (
-                            <link.icon className="h-10 w-10 text-gray-500" />
-                          )}
-                        </div>
-                        <div className="ml-4">
-                          <div className="text-sm font-medium text-gray-900">{link.name}</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-center hidden sm:flex">
-                      {link.status !== 'Agendado' ? (
-                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                          Agendado
-                        </span>
-                      ) : null}
-                    </td>
-
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      <SheetItem />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+    <div className="px-20 p-10 ">
+      <div className="w-full flex items-center justify-between">
+        <h1 className="font-bold text-2xl">Ola, {user.user?.name}</h1>
+        <Button className="flex gap-2">
+          <PlayIcon />
+          Volte a estudar
+        </Button>
       </div>
+
+      
+
     </div>
   )
 }

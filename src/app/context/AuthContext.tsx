@@ -34,25 +34,42 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isLoading, setIsLoading] = useState(true);
 
   // Temporary local user for testing
-  const [localUser, setLocalUser] = useState<User | null>({
-    id: '1',
-    name: 'Test User',
-    email: 'test@example.com',
-    password: '123456',
-    picture: 'https://picsum.photos/200',
-    role: 'admin'
-  });
+  const [localUser, setLocalUser] = useState<User[] | null>( // Changed to an array of User
+    [
+      {
+        id: '1',
+        name: 'Test User',
+        email: 'test@example.com',
+        password: '123456',
+        picture: 'https://picsum.photos/200',
+        role: 'admin'
+      },
+      {
+        id: '2', // Added a second user
+        name: 'Another User',
+        email: 'another@example.com',
+        password: '654321',
+        picture: 'https://picsum.photos/201',
+        role: 'user'
+      }
+    ]
+  );
 
   useEffect(() => {
     // Set the local user to the user state for testing
-    setUser(localUser);
+    if (localUser && localUser.length > 0) {
+      setUser(localUser[0]); // Set to the first user
+    } else {
+      setUser(null); // Handle case where localUser is empty
+    }
     setIsLoading(false);
   }, []);
 
   const login = async (email: string, password: string) => {
     // Implement login logic here
-    setUser(localUser);
-    setCookie('user', JSON.stringify(localUser), {
+    const foundUser = localUser?.find(user => user.email === email && user.password === password);
+    setUser(foundUser || null); // Set to found user or null if not found
+    setCookie('user', JSON.stringify(foundUser), { // Store only the found user
       expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 1 day from now
     });
   };
@@ -71,7 +88,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   return (
-    <AuthContext.Provider value={{ user: localUser, login, logout, isLoading }}>
+    <AuthContext.Provider value={{ user: user, login, logout, isLoading }}>
       {children}
     </AuthContext.Provider>
   );

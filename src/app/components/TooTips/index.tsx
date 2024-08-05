@@ -1,13 +1,17 @@
+"use cliente"
 import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip"
 
-import { DashboardIcon, LogoutIcon, MultiServiceIcon, SettingsIcon } from "../IconsSvg"
+import { MultiServiceIcon, } from "../IconsSvg"
 import Link from "next/link"
 import { linkTooltip } from "@/app/utils/linkTooltip"
 import { menuLinkFooter } from "@/app/utils/links"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
+import LinkTooltipsAdmin from "../LinkTooltipsAdmin"
+import { useAuth } from "@/app/context/AuthContext"
 
 export default function Sidebar() {
+  const { user } = useAuth()
   return (
     <>
       <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col bg-background sm:flex  text-white">
@@ -45,6 +49,10 @@ export default function Sidebar() {
                 )
               })
             }
+            {user?.role === 'user' && <LinkTooltipsAdmin />}
+
+
+
           </TooltipProvider>
         </nav>
         <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5 ">

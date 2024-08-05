@@ -1,4 +1,4 @@
-import { DashboardIcon, HomeIcon, LineChartIcon, PackageIcon,  UsersIcon, VideoCallIcon } from "../components/IconsSvg"
+import { CreateAccountsIcon, DashboardIcon, HomeIcon, LineChartIcon, PackageIcon,  UsersIcon, VideoCallIcon } from "../components/IconsSvg"
 
 
 export const linkTooltip = [
@@ -41,4 +41,14 @@ export const linkTooltip = [
     className: "flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8 hover:bg-zinc-500 hover:text-white"
   },
   
+]
+
+
+export const linkTooltipAdmin = [
+  {
+    href: "/dashboard/account",
+    name: "Analise",
+    icon: CreateAccountsIcon,
+    className: "flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8 hover:bg-zinc-500 hover:text-white"
+  },
 ]

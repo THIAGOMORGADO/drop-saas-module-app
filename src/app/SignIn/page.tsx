@@ -20,7 +20,7 @@ export default function SignInPage() {
     try {
 
       await login(data.email, data.password);
-      router.push('/dashboard'); // Redirect to dashboard after successful login
+      router.push('/dashboard/home'); // Redirect to dashboard after successful login
     } catch (error) {
       console.error('Login failed:', error);
       // Here you might want to set an error state or show an error message to the user

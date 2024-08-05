@@ -16,6 +16,7 @@ interface Notification {
 export default function DashboardMain() {
   const { user } = useAuth()
   const [isOpenModal, setIsOpenModal] = useState(false)
+
   const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false)
   const [isLoadingNotification, setIsLoadingNotification] = useState(true)
   const [notifications, setNotifications] = useState<Notification[]>([])
